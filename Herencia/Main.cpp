@@ -8,6 +8,8 @@ using std::cout;
 
 int main() {
 	
+	Persona* pablo = new Empleado("Pablo", 18, 'M', "Casado",1000,11000,"Marino");
+
 	Persona* elementos[4];
 	elementos[0] = new Persona("Maria", 19, 'F', "Soltera");
 	elementos[1] = new Empleado("Josefino", 22, 'M', "Soltero",1001,1200,"Full Stack");
@@ -17,6 +19,9 @@ int main() {
 	for (int i = 0;i < 4;i++) {
 		elementos[i]->imprimirPersona();
 	}
+
+	Empleado* tmp1 = ((Empleado*)(pablo));
+	cout<<"lelo:" <<tmp1->getPuesto();
 
 	Empleado* tmp = ((Empleado*)(elementos[1]));
 

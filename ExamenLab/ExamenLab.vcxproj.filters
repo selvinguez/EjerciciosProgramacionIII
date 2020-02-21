@@ -15,27 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Persona.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Socio.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Empleado.h">
+    <ClInclude Include="Polinomio.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Persona.cpp">
+    <ClCompile Include="Polinomio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Empleado.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Socio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
