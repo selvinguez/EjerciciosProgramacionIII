@@ -3,6 +3,8 @@
 #ifndef ESTRUCTURAS_H
 #define ESTRUCTURAS_H
 
+#include <fstream>
+#include <string>
 struct InfoTabla
 {
 	int cantidadRegistros;
@@ -40,6 +42,8 @@ struct RegistroLogico
 {
 	bool valor;
 };
+
+
 
 
 #endif //!ESTRUCTURAS_H

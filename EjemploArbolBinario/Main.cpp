@@ -11,7 +11,6 @@ int main()
 	btree.agregarNodoArbol("Fernando");
 	btree.agregarNodoArbol("Gerardo");
 	btree.agregarNodoArbol("Angel");
-	btree.agregarNodoArbol("Saul");
 
 	btree.imprimir();
 

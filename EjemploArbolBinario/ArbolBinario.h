@@ -15,7 +15,7 @@ public:
 	ArbolBinario();
 
 	void agregarNodoArbol(const char*);
-
+	int Altura(NodoArbol*);
 	void imprimir();
 
 

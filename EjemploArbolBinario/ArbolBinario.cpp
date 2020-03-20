@@ -1,7 +1,7 @@
 
 #include "ArbolBinario.h"
 #include <iostream>
-
+#include <algorithm>
 using namespace std;
 
 ArbolBinario::ArbolBinario(): raiz(nullptr)
@@ -30,6 +30,18 @@ NodoArbol* ArbolBinario::agregarNodoRec(NodoArbol* _raiz, const char* _nombre)
 void ArbolBinario::imprimir()
 {
 	imprimirRec(raiz);
+	cout << "Lineas: " << Altura(raiz);
+}
+
+int ArbolBinario::Altura(NodoArbol* _raiz) {
+	
+	if (_raiz == NULL) {
+		return 0;
+	}
+	else {
+
+		return 1 + (max(Altura(_raiz->getHijoIzquierdo()),Altura(_raiz->getHijoDerecho())));
+	}
 }
 
 void ArbolBinario::imprimirRec(NodoArbol* _raiz)
