@@ -1,22 +1,34 @@
 #include "alumno.h"
 #include "Materia.h"
+#include "Notas.h"
 #include <conio.h>
 int main()
 {
-	alumno Alumno;
-	Materia ma;
+	Alumno Alumno;
+	materia ma;
+	nota nota;
+
+
 	/*Alumno.ingresarAlumno();
 	Alumno.ingresarAlumno();
 	Alumno.ingresarAlumno();
 	Alumno.ingresarAlumno();
 
 	Alumno.imprimirAlumnis();*/
+	/*
+	ma.ingresarmaterias();
+	ma.ingresarmaterias();
+	ma.ingresarmaterias();
 
-	ma.ingresarMateria();
-	ma.ingresarMateria();
-	ma.ingresarMateria();
+	ma.imprimirmaterias();*/
 
-	ma.imprimirMateria();
+
+
+	nota.agregarnota();
+
+
+	Alumno.imprimirAlumnos();
+
 
 	_getch();
 }

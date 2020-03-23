@@ -160,89 +160,65 @@ int main()
 	cout << "¡Archivo creado correctamente!";
 
 	archivoTabla.close();
-
-	archivoTabla.open(nombreTabla, ios::in | ios::binary);
-	archivoTabla.seekg(0, ios::beg);
-
 	
-
-	for (int i = 0; i < informacion.cantidadRegistros; i++)
-	{
-		archivoTabla.seekg(sizeof(InfoTabla), ios::beg);
-		long posicionLectura = archivoTabla.tellg();
-		for (int j = 0; j < informacion.cantidadCampos; j++)
-		{
-			archivoTabla.seekg(posicionLectura, ios::beg);
-			InfoCampo campo;
-			archivoTabla.read(reinterpret_cast<char*>(&campo), sizeof(InfoCampo));
-			posicionLectura = archivoTabla.tellg();
-			
-			switch (campo.tipoCampo)
-			{
-			case TipoCampo::t_Entero:
-			{
-				RegistroEntero v;
-				archivoTabla.seekg(posicionLectura, ios::beg); 
-				archivoTabla.read(reinterpret_cast< char*>(&v), sizeof(RegistroEntero));
-				cout<< " " << v.valor;
-			}
-			break;
-			case TipoCampo::t_Cadena:
-			{
-				
-				RegistroCadena v;
-
-				archivoTabla.seekg(posicionLectura, ios::beg);
-				archivoTabla.read(reinterpret_cast<char*>(&v), sizeof(RegistroCadena));
-				cout<<" " << v.valor;
-			}
-			break;
-			case TipoCampo::t_Char:
-			{
-		
-				RegistroCaracter v;
-				
-				archivoTabla.seekg(posicionLectura, ios::beg);
-				archivoTabla.read(reinterpret_cast< char*>(&v), sizeof(RegistroCaracter));
-				cout << " " << v.valor;
-			}
-			break;
-			case TipoCampo::t_Decimal:
-			{
-			
-				RegistroDecimal v;
-		
-				archivoTabla.seekg(posicionLectura, ios::beg);
-				archivoTabla.read(reinterpret_cast< char*>(&v), sizeof(RegistroDecimal));
-				cout << " " << v.valor;
-			}
-			break;
-			case TipoCampo::t_Logico:
-			{
-				
-				RegistroLogico v;
-
-			
-
-				archivoTabla.seekg(posicionLectura, ios::beg);
-				archivoTabla.write(reinterpret_cast<const char*>(&v), sizeof(RegistroLogico));
-				cout<<" " << v.valor;
-			
-			}
-			break;
-			} //FIN SWITCH
-
-		
-		
-		}
+	archivoTabla.open( nombreTabla , ios::in | ios::binary);
+	InfoTabla info;
+	InfoCampo campo;
+	archivoTabla.seekg(sizeof(info), ios::beg);
+	TipoCampo* tipoC = new TipoCampo[cantCampos];
 	
-	
-	
+	for (int i = 0; i < cantCampos; i++) {
+		archivoTabla.read((char*)&campo, sizeof(campo));
+		tipoC[i] = campo.tipoCampo;
+		cout << " " << campo.nombreCampo;
 	}
+	cout <<endl;
 
+	for (int i = 0; i < cantRegistros; i++) {
+		for (int j = 0; j < cantCampos; j++) {
+			switch (tipoC[j]) {
+			case TipoCampo::t_Entero: {
+				RegistroEntero num;
 
+				archivoTabla.read((char*)&num.valor, sizeof(RegistroEntero));
+				std::cout << '|' << num.valor << '|';
+				break;
+			}
+			case TipoCampo::t_Cadena: {
+				RegistroCadena cade;
 
-	
+				archivoTabla.read((char*)&cade.valor, sizeof(RegistroCadena));
+				std::cout << '|' << cade.valor << '|';
+				break;
+			}
+			case TipoCampo::t_Char: {
+				RegistroCaracter cha;
+
+				archivoTabla.read((char*)&cha.valor, sizeof(RegistroCaracter));
+				std::cout << '|' << cha.valor << '|';
+				break;
+			}
+			case TipoCampo::t_Decimal: {
+				RegistroDecimal dec;
+
+				archivoTabla.read((char*)&dec.valor, sizeof(RegistroDecimal));
+				std::cout << '|' << dec.valor << '|';
+				break;
+			}
+			case TipoCampo::t_Logico: {
+				RegistroLogico lol;
+				archivoTabla.read((char*)&lol.valor, sizeof(RegistroLogico));
+				std::cout << '|' <<lol.valor << 'l';
+				break;
+			}
+			}
+		}
+		cout << endl;
+	}
+	cout << endl;
+	archivoTabla.close();
 	_getch();
 }
+
+
 

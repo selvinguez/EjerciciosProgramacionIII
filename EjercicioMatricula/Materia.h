@@ -1,28 +1,33 @@
 #pragma once
-#include <fstream>
-
 #ifndef MATERIA_H
 #define MATERIA_H
-
+#include <fstream>
+#include <iostream>
 using namespace std;
-struct MateriaRegistro
+
+struct materiaarchivo
 {
-	int codigoMateria;
+	int codigo;
 	char nombre[20];
 	int uv;
+	//size 28 bytes
 };
 
-class Materia
+class materia
 {
 private:
-	fstream MateriaBinario;
+	fstream materiabinario;
 
 public:
-	Materia();
-	void ingresarMateria();
-	void consultarMateria();
-	bool buscarMateria();
-	void imprimirMateria();
+	materia();
+	void ingresarmaterias();
+	void consultarmateria();
+	void imprimirmateria();
+	bool buscarmateria(int);
+	int buscarUv(int);
+
+	int buscarUvTotal();
 };
 
-#endif // !ALUMNO_H
+#endif 
+

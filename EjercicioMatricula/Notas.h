@@ -1,26 +1,28 @@
 #pragma once
 #ifndef NOTAS_H
 #define NOTAS_H
-
 #include <fstream>
 using namespace std;
 
-struct NotaRegistro
+struct notaregistro
 {
-	char numeroCuenta[9];
-	int codigoMateria;
+	char cuenta[9];
+	int codigo;
 	float nota;
 };
 
-class Nota {
+class nota
+{
 private:
-	fstream notaBinario;
+	fstream notasbinario;
 
 public:
-	Nota();
-	void agregarNota();
-	void modificarNota();
-	void imprimirNota();
+	nota();
+	void agregarnota();
+	void modificanota();
+	void imprimirnotas(char[]);
+	void actualizarpromedio(char[]);
 };
 
 #endif // !NOTAS_H
+

@@ -1,56 +1,129 @@
 #include "Materia.h"
 #include <iostream>
 
-using namespace std;
-
-Materia::Materia() {
-	MateriaBinario.open("materias.dat", ios::in | ios::out | ios::app | ios::binary);
-
-	if (!MateriaBinario)
-		cout << "Error en aertura en archivo de alumnos";
-
-	MateriaBinario.close();
-
-}
-
-void Materia::ingresarMateria() {
-	MateriaBinario.open("materias.dat", ios::in | ios::out | ios::app | ios::binary);
-
-	MateriaRegistro nuevaMateria;
-
-	cout << "Ingrese codigo de materia: ";
-	cin >> nuevaMateria.codigoMateria;
-
-	cout << "Ingrese nombre de materia: ";
-	cin >> nuevaMateria.nombre;
-	cout << "Ingrese uv: ";
-	cin >>nuevaMateria.uv ;
-
-	MateriaBinario.seekp(0, ios::end);// coloca el cursor de ESCRITURA en un byte especifico
-	MateriaBinario.write(reinterpret_cast<const char*>(&nuevaMateria), sizeof(MateriaRegistro));
-
-	MateriaBinario.close();
-
-	cout << "Materia agregadA\n";
-
-}
-
-void Materia::imprimirMateria() {
-	MateriaBinario.open("materias.dat", ios::in | ios::binary);
-
-	MateriaRegistro Lectura;
-	//colaca el cursor de LECTURA en un byte indicado
-	MateriaBinario.seekg(0, ios::beg);
-
-	MateriaBinario.read(reinterpret_cast<char*>(&Lectura), sizeof(MateriaRegistro));
-
-	while (!MateriaBinario.eof())
+materia::materia()
+{
+	materiabinario.open("materia.dat", ios::in | ios::out | ios::app | ios::binary);
+	if (!materiabinario)
 	{
-		cout << "Materia { Codigo: " << Lectura.codigoMateria << ", nombre : "
-			<< Lectura.nombre << ", Uv: " << Lectura.uv << " }\n";
-		MateriaBinario.read(reinterpret_cast<char*>(&Lectura), sizeof(MateriaRegistro));
+		cout << "error de apeura";
 	}
-	MateriaBinario.close();
+	materiabinario.close();
 }
+
+void materia::ingresarmaterias()
+{
+	materiabinario.open("materia.dat", ios::in | ios::out | ios::app | ios::binary);
+	materiaarchivo nuevo;
+	cout << "Ingrese numero de cuenta: ";
+	cin >> nuevo.codigo;
+
+	cout << "Ingrese el nombre de alumno: ";
+	cin >> nuevo.nombre;
+
+	cout << "Ingrese la cantidad de unidades valorativas: ";
+	cin >> nuevo.uv;
+
+	//posicion de escritura al final del archivo
+	materiabinario.seekp(0, ios::end);
+	materiabinario.write(reinterpret_cast<const char*>(&nuevo), sizeof(materiaarchivo));
+	materiabinario.close();
+	cout << "materia agregado";
+}
+
+void materia::imprimirmateria()
+{
+	materiabinario.open("materia.dat", ios::in | ios::binary);
+
+	materiaarchivo lectura;
+
+	//coloca el cursor de lectura en una byte indicado
+	materiabinario.seekg(0, ios::beg);
+	materiabinario.read(reinterpret_cast<char*>(&lectura), sizeof(materiaarchivo));
+	while (!materiabinario.eof())
+	{
+		cout << "Alumno [ Codigo de materia " << lectura.codigo << "  nombre:" <<
+			lectura.nombre << "   Unidades Valorativas: " << lectura.uv << " ]\n";
+		materiabinario.read(reinterpret_cast<char*>(&lectura), sizeof(materiaarchivo));
+
+
+	}
+	materiabinario.close();
+}
+
+bool materia::buscarmateria(int codigo)
+{
+	materiabinario.open("materia.dat", ios::in | ios::binary);
+
+	materiabinario.seekg(0, ios::beg);
+	materiaarchivo lectura;
+
+	materiabinario.read(reinterpret_cast<char*>(&lectura), sizeof(materiaarchivo));
+	while (!materiabinario.eof())
+	{
+		if (lectura.codigo == codigo)
+		{
+			materiabinario.close();
+			return true;
+		}
+
+		materiabinario.read(reinterpret_cast<char*>(&lectura), sizeof(materiaarchivo));
+
+	}
+	materiabinario.close();
+	return false;
+}
+
+
+int materia::buscarUv(int codigo)
+{
+	materiabinario.open("materia.dat", ios::in | ios::binary);
+
+	materiabinario.seekg(0, ios::beg);
+	materiaarchivo lectura;
+
+	materiabinario.read(reinterpret_cast<char*>(&lectura), sizeof(materiaarchivo));
+	while (!materiabinario.eof())
+	{
+		if (lectura.codigo == codigo)
+		{
+			materiabinario.close();
+			return lectura.uv;
+		}
+
+		materiabinario.read(reinterpret_cast<char*>(&lectura), sizeof(materiaarchivo));
+
+	}
+	materiabinario.close();
+	return 0;
+}
+
+int materia::buscarUvTotal()
+{
+	materiabinario.open("materia.dat", ios::in | ios::binary);
+
+	materiabinario.seekg(0, ios::beg);
+	materiaarchivo lectura;
+	int uvp = 0;
+
+	materiabinario.read(reinterpret_cast<char*>(&lectura), sizeof(materiaarchivo));
+	while (!materiabinario.eof())
+	{
+		uvp += lectura.uv;
+		materiabinario.read(reinterpret_cast<char*>(&lectura), sizeof(materiaarchivo));
+
+	}
+	materiabinario.close();
+	return uvp;
+}
+
+
+
+
+
+
+
+
+
 
 

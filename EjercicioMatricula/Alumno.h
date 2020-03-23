@@ -1,6 +1,7 @@
 #pragma once
-
 #include <fstream>
+#include <iostream>
+using namespace std;
 
 #ifndef ALUMNO_H
 #define ALUMNO_H
@@ -13,19 +14,22 @@ struct alumnoRegistro
 	float promedio;
 };
 
-class alumno
+class Alumno
 {
 private:
 	fstream alumnosBinario;
-
+	fstream tmp;
 public:
-	alumno();
+	Alumno();
 	void ingresarAlumno();
 	void consultarAlumno();
 	bool buscarAlumno(char[]);
-	void imprimirAlumnis();
+	void imprimirAlumnos();
+	int cantidadA();
 
-	int obtenerCantidadAlumnos();
+	void ActualizarPromedio(char [] ,float );
+
 };
 
 #endif // !ALUMNO_H
+
