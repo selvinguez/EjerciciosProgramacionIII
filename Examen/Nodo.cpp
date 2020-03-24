@@ -19,14 +19,14 @@ Nodo::Nodo(int _codigo, const char* _nombre, Nodo*_sig, Nodo* _ant){
 
 }
 
-void Nodo::setsig(Nodo* sig)
+void Nodo::setsig(Nodo* _sig)
 {
-	this->sig = sig;
+	this->sig = _sig;
 }
 
-void Nodo::setAnt(Nodo* ant)
+void Nodo::setAnt(Nodo* _ant)
 {
-	this->ant = ant;
+	this->ant = _ant;
 }
 
 Nodo* Nodo::getsig()

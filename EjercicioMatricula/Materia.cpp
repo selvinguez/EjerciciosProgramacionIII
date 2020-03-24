@@ -17,10 +17,8 @@ void materia::ingresarmaterias()
 	materiaarchivo nuevo;
 	cout << "Ingrese numero de cuenta: ";
 	cin >> nuevo.codigo;
-
 	cout << "Ingrese el nombre de alumno: ";
 	cin >> nuevo.nombre;
-
 	cout << "Ingrese la cantidad de unidades valorativas: ";
 	cin >> nuevo.uv;
 

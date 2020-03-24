@@ -8,23 +8,31 @@ Stack::Stack() : primero(nullptr), ultimo(nullptr)
 
 bool Stack::isEmpty()
 {
-	if (primero == nullptr) {
-
-		return false;
-	}
-	return true;
+	return primero == nullptr;
 }
 
 void Stack::Push(const char* _nombre, int Codigo) {
 	Nodo* tmp = new Nodo(Codigo, _nombre, nullptr, nullptr);
-	if (isEmpty() == true) {
-		primero = tmp;
-		ultimo = tmp;
+
+	if (isEmpty())
+	{
+		primero = ultimo=tmp;
+		
 	}
-	else {
-		ultimo->setsig(tmp);
-		tmp->setAnt(ultimo);
+	else
+	{
+		Nodo* tmp2 = primero;
+
+		while (tmp2->getsig() != nullptr)
+		{
+			tmp2 = tmp2->getsig();
+
+		}
+
+		tmp2->setsig(tmp);
+		tmp->setAnt(tmp2);
 		ultimo = tmp;
+
 	}
 }
 
@@ -33,40 +41,48 @@ void Stack::print() {
 	printRecursivo(primero);
 }
 
-Nodo* Stack::printRecursivo(Nodo* _primero){
+void Stack::printRecursivo(Nodo* _primero) {
 
-	
-	if (primero == nullptr)
+
+	if (_primero == nullptr)
 		return;
-	
-	primero = primero;
 
-	cout << "[ " << primero->getcodigo() << " ] " << "[ " << primero->getNombre() << " ] ";
-	primero = primero->getsig();
-	printRecursivo(primero);
-
+	cout << "[ " << _primero->getcodigo() << " / " << _primero->getNombre() << " ]";
+	printRecursivo(_primero->getsig());
 
 }
 
 bool Stack::pop() {
-	if (isEmpty())
-	{
-		return;
+	if (isEmpty() == true) {
+		cout << "Vacio";
 	}
-
-	Nodo* actual = ultimo;
-
-	if (actual == ultimo)
-	{
-		ultimo = ultimo->getant;
-
+	else {
+		Nodo* actual = primero;
+		while (actual->getsig() != nullptr) {
+			actual = actual->getsig();
+		}
+		ultimo = actual->getant();
 		delete actual;
+		return true;
 	}
-
+	return false;
 
 }
 
 void Stack::savetofile() {
+	archivo.open("Examen.dat", ios::in | ios::out | ios::app | ios::binary);
+	Nodo* nuevo;
+
+
+	nuevo = primero;
+	
+	while (nuevo->getsig ()!= nullptr) {
+		archivo.seekp(0, ios::end);
+	archivo.write(reinterpret_cast<const char*>(&nuevo), sizeof(Nodo));
+	nuevo = nuevo->getsig();
+	}
+	archivo.close();
+	cout << "Archivo agregado";
 
 
 }

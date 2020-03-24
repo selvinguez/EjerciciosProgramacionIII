@@ -1,7 +1,7 @@
 #ifndef STACK_H
 #define STACK_H
 #include "Nodo.h"
-
+#include <fstream>
 #include <iostream>
 using namespace std;
 class Stack
@@ -15,7 +15,7 @@ class Stack
 private:
 	Nodo* primero;
 	Nodo* ultimo;
-
+	fstream archivo;
 public:
 	Stack();
 
@@ -23,8 +23,8 @@ public:
 	bool pop();
 	bool isEmpty();
 	void print();
-	Nodo* printRecursivo(Nodo*);
-	void savetofile(const char*);
+	void printRecursivo(Nodo*);
+	void savetofile();
 };
 
 #endif //
